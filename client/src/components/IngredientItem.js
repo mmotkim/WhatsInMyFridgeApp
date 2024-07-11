@@ -7,7 +7,7 @@ const IngredientItem = ({ ingredients }) => {
 
   const removeItem =(event) => {
     event.preventDefault();
-    axios.delete(`https://whats-in-my-fridge-api.herokuapp.com/users/${ingredients.user_id}/ingredients/${ingredients.id}`)
+    axios.delete(`https://${process.env.REACT_APP_BACKENDURL}/users/${ingredients.user_id}/ingredients/${ingredients.id}`)
     .then(res => {
       alert('Ingredient Removed!');
       console.log(res);

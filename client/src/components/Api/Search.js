@@ -12,7 +12,7 @@ class Search extends Component {
 
         axios
             .get(
-                `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${this.state.ingredients}&app_id=${process.env.REACT_APP_EM_ID}&app_key=${process.env.REACT_APP_EM_KEY}&from=12`
+                `https://api.edamam.com/search?q=${this.state.ingredients}&app_id=${process.env.REACT_APP_EM_ID}&app_key=${process.env.REACT_APP_EM_KEY}&cuisineType=South%20East%20Asian`
             )
             .then(res => {
                //console.log(res.data);

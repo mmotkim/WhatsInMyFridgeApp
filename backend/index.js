@@ -65,6 +65,9 @@ app.get("/users/:id/recipes", db.getFavRecipe);
 app.post("/users/:id/recipes", db.createFavRecipe);
 app.put("/users/:id/recipes/:id", db.updateFavRecipe);
 
+//Business Processes
+app.post("/initializeUser", db.initializeUser);
+
 app.post("/test", db.doTest);
 
 app.listen(process.env.PORT || port, () => {

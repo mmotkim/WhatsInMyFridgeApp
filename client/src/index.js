@@ -6,6 +6,8 @@ import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
 //import axios from 'axios';
 
+require('dotenv').config()
+
 //axios.defaults.baseURL=process.env.REACT_APP_AXIOS_BASE_URL;
 //console.log(axios.defaults.baseURL);
 // A function that routes the user to the right place

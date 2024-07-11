@@ -1,21 +1,21 @@
 require("dotenv").config();
 
 //Local Dev
-// const Pool = require('pg').Pool
-// const pool = new Pool({
-//   user: process.env.PGUSER,
-//   host: process.env.PGHOST,
-//   database:'fridgeapp',
-//   password: process.env.PGPASSWORD,
-//   port: 5432,
-// })
+const Pool = require('pg').Pool
+const pool = new Pool({
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database:'myfridge',
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+})
 
 //Heroku Dev
-const { Pool } = require("pg");
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true
-});
+// const { Pool } = require("pg");
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: true
+// });
 
 const getUsers = (request, response) => {
   pool.query("SELECT * FROM users ORDER BY id ASC", (error, results) => {
@@ -37,6 +37,25 @@ const getUser = (request, response) => {
     response.status(200).json(results.rows);
   });
 };
+
+const getUserByAuth0 = (request, response) => {
+  const {
+    auth0_id
+  } = request.body;
+
+  pool.query(
+    "SELECT * FROM users where auth0_id = $1",
+    [auth0_id],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    }
+  );
+}
+
+
 
 const createUser = (request, response) => {
   const { username, email, auth0_id } = request.body;
@@ -182,6 +201,27 @@ const updateFavRecipe = (request, response) => {
   );
 };
 
+const initializeUser = async (request, response) => {
+  const { email, auth0_id, username } = request.body;
+
+  try {
+    let user = await pool.query(
+      "SELECT * FROM users WHERE email=$1 AND auth0_id=$2 AND username=$3",
+      [email, auth0_id, username]
+    );
+
+    // if user is found in the db, query the ing
+    let ingredient = await pool.query(
+      "SELECT * FROM ingredients WHERE user_id=$1",
+      [user.rows[0].id]
+    ); 
+    response.status(200).json({ message: "User found", user: user.rows, ingredient: ingredient.rows }); 
+  } catch (error) {
+    throw error;
+  }
+
+};
+
 const doTest = async (request, response) => {
   const { email, auth0_id, username } = request.body;
 
@@ -224,5 +264,6 @@ module.exports = {
   getFavRecipe,
   createFavRecipe,
   updateFavRecipe,
-  doTest
+  doTest,
+  initializeUser
 };

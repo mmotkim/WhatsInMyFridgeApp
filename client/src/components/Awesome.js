@@ -14,16 +14,14 @@ class Awesome extends React.Component {
     
     state = {ingredients: []};
     
-    componentDidUpdate () {
-        if(this.props.userID)
-        axios.get( `https://whats-in-my-fridge-api.herokuapp.com/users/${this.props.userID}/ingredients`)
+    componentDidUpdate (prevProps) {
+        // if(this.props.userID && prevProps.data != this.props.data)
+        if(prevProps.userID != this.props.userID)
+        axios.get( `${process.env.REACT_APP_BACKENDURL}/users/${this.props.userID}/ingredients`)
         .then(response => {
             this.setState({ ingredients: response.data });
-            //console.log(this.state.ingredients)
-            
+            //console.log(this.state.ingredients) 
         })
-
-
     }
 
     render() {
