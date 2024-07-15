@@ -25,7 +25,6 @@ class AddIngredient extends React.Component {
       .catch((error) => {
         this.setState({ error, isLoading: false });
       });
-    console.log(this.ingredients);
   }
 
   handleCheckboxChange = (ingredientId) => {
@@ -57,7 +56,7 @@ class AddIngredient extends React.Component {
     event.preventDefault();
     console.log(this.props.user.id);
     axios
-      .post(`${this.state.url2}/user/${this.props.user.id}/ingredientslist`, {
+      .post(`${this.state.url2}/users/${this.props.user.id}/ingredientslist`, {
         user_id: this.props.user.id,
         ingredients: Array.from(this.state.selectedIngredients),
       })

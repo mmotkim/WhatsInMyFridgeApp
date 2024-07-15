@@ -126,6 +126,12 @@
   padding: 20px;
   text-align: center;
 }
+.ingredients-container {
+  max-width: 800px;
+  margin: 0 10px 20px 0;
+  /* padding: 20px; */
+  text-align: left;
+}
 
 .ingredient-list {
   display: grid;
@@ -133,11 +139,18 @@
   gap: 10px;
 }
 
+.ingredient-list-search {
+  display: inline-block;
+  grid-template-columns: fit-content(40%);
+  gap: 10px;
+  text-align: left;
+}
+
 .ingredient-item {
-  display: flex;
   align-items: center; /* Align items to the top */
   justify-content: flex-start; /* Align items to the left */
   padding: 5px;
+  margin: 0px 1em 0px 0px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
@@ -154,6 +167,22 @@
   margin-left: 3px; /* Add space between checkbox and label */
   width: 19px; /* Increase the width */
   height: 19px; /* Increase the height */
+  background-color: #ffc107;
+  border-color: #ffc107;
+  accent-color: #ffc107;
+}
+
+.ingredient-item input[type="checkbox"]:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  position: absolute;
+  top: 4px;
+  left: 7px;
+  transform: rotate(45deg);
 }
 
 .bg {

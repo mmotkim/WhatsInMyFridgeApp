@@ -61,7 +61,8 @@ app.post("/users/:id/recipes", db.createFavRecipe);
 app.put("/users/:id/recipes/:id", db.updateFavRecipe);
 //Ingredientslist table
 app.get("/ingredientslist", db.getIngredientsList);
-app.post("/user/:id/ingredientslist", db.addIngredientslistUsers);
+app.post("/users/:id/ingredientslist", db.addIngredientslistUsers);
+app.get("/users/:id/ingredientslist", db.getUserIngredientsList);
 
 //Business Processes
 app.post("/initializeUser", db.initializeUser);

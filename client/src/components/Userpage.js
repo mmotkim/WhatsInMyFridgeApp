@@ -15,7 +15,7 @@ const Userpage = () => {
   console.log(axios.baseURL);
   useEffect(() => {
     const initializeUser = async () => {
-      const mytest = await axios({
+      axios({
         method: "POST",
         url: "http://localhost:5000/initializeUser",
         data: {
@@ -23,12 +23,13 @@ const Userpage = () => {
           auth0_id: user.sub,
           username: user.given_name,
         },
+      }).then((res) => {
+        setIngredients(res.data.ingredient);
+        setContextUser(res.data.user[0]);
+        setUser(res.data.user[0].id);
       });
       // console.log(mytest.data.ingredient);
       // console.log(mytest.data.user[0].id);
-      setIngredients(mytest.data.ingredient);
-      setContextUser(mytest.data.user[0]);
-      setUser(mytest.data.user[0].id);
     };
     if (user) initializeUser();
   }, [user]);
@@ -37,11 +38,11 @@ const Userpage = () => {
     return <div>Loading...</div>;
   }
 
-  console.log("Whats up");
-  console.log(user.email);
-  console.log(user.sub);
-  console.log(user.given_name);
-  console.log(userID);
+  // console.log("Whats up");
+  // console.log(user.email);
+  // console.log(user.sub);
+  // console.log(user.given_name);
+  // console.log(userID);
 
   return (
     <div className="container-fluid padding">

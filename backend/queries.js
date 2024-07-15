@@ -151,6 +151,7 @@ const addIngredientslistUsers = (request, response) => {
   const query = `
     INSERT INTO ingredientslist_users (ingredientslist_id, users_id)
     VALUES ${values}
+    ON CONFLICT (ingredientslist_id, users_id) DO NOTHING;
   `;
 
   pool.query(query, (error, results) => {
@@ -158,6 +159,19 @@ const addIngredientslistUsers = (request, response) => {
       throw error;
     }
     response.status(201).send(`New ingredient added with ID: ${results.rows.map((row) => row.id).join(", ")}`);
+  });
+};
+
+const getUserIngredientsList = (request, response) => {
+  const user_id = parseInt(request.params.id);
+
+  pool.query("SELECT ingredientslist_id FROM ingredientslist_users WHERE users_id = $1", [user_id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    // Map the results to return only the ingredientslist_id values
+    const ingredientsList = results.rows.map((row) => row.ingredientslist_id);
+    response.status(200).json(ingredientsList);
   });
 };
 
@@ -247,4 +261,5 @@ module.exports = {
   initializeUser,
   getIngredientsList,
   addIngredientslistUsers,
+  getUserIngredientsList,
 };

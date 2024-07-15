@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import AddIngredient from "./AddIngredient";
 import ScrollBarPage from "./Scrollbar";
-import { Consumer } from "../Context";
+import { Consumer, Context } from "../Context";
 
 class Awesome extends React.Component {
   constructor(props) {
@@ -10,6 +10,14 @@ class Awesome extends React.Component {
   }
 
   state = { ingredients: [] };
+
+  componentDidMount() {
+    const { user, heading } = this.context;
+
+    console.log("hellos");
+    console.log(user);
+    console.log(heading);
+  }
 
   componentDidUpdate(prevProps) {
     // if(this.props.userID && prevProps.data != this.props.data)
@@ -43,5 +51,7 @@ class Awesome extends React.Component {
     );
   }
 }
+
+Awesome.contextType = Context;
 
 export default Awesome;
