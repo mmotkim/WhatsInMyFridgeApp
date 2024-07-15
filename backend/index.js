@@ -1,8 +1,8 @@
 //production dependencies
-//const helmet = require('helmet') //helmet - secure HTTP headers in an Express app
-//const compression = require('compression') //compression - compression middleware
-//const rateLimit = require('express-rate-limit') //express-rate-limit - limit repeated requests to endpoints
-//const { body, check } = require('express-validator') //express-validator - string validators and santizers
+const helmet = require("helmet"); //helmet - secure HTTP headers in an Express app
+const compression = require("compression"); //compression - compression middleware
+const rateLimit = require("express-rate-limit"); //express-rate-limit - limit repeated requests to endpoints
+const { body, check } = require("express-validator"); //express-validator - string validators and santizers
 
 //original dependencies
 const express = require("express");
@@ -20,17 +20,20 @@ app.use(
 
 // mega:
 // define middleware to handle cors
-// if (process.env.NODE_ENV==="development"){
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Origin,Authorization,Content-Type");
-  next();
-});
-
-//production
-//app.use(compression())
-//app.use(helmet())
+if (process.env.NODE_ENV === "development") {
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Origin,Authorization,Content-Type");
+    next();
+  });
+  console.log("dev mode");
+} else {
+  //production
+  console.log("prod mode");
+  app.use(compression());
+  app.use(helmet());
+}
 
 //main
 app.get("/", (request, response) => {
