@@ -126,6 +126,7 @@ class Search extends Component {
               </h1>
               <p className="lead text-center search-text">Get some recipes for your ingredients:</p>
               <form onSubmit={this.findRecipe.bind(this, dispatch)}>
+                <div className="search-text">Search for additional ingredients: </div>
                 <div className="form-group">
                   <input
                     type="text"

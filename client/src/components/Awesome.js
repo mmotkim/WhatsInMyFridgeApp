@@ -42,8 +42,8 @@ class Awesome extends React.Component {
             <div>
               <h2 className="userpage-header">Add to Fridge:</h2>
               <AddIngredient userID={this.props.userID} user={context.user} />
-              <h2 className="userpage-header">Currently in Fridge:</h2>
-              <ScrollBarPage ingredients={this.state.ingredients} />
+              {/* <h2 className="userpage-header">Currently in Fridge:</h2>
+              <ScrollBarPage ingredients={this.state.ingredients} /> */}
             </div>
           );
         }}
