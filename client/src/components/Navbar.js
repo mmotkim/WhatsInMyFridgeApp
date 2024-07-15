@@ -113,7 +113,7 @@ const Navbar = () => {
               className="btn btn-sm btn-outline-warning "
               onClick={() =>
                 loginWithRedirect({
-                  redirect_uri: "http://localhost:3000/user",
+                  redirect_uri: `${process.env.REACT_APP_CLIENTURL}/user`,
                   //'https://whatsinmyfridgeapp.herokuapp.com/'
                 })
               }
@@ -128,7 +128,7 @@ const Navbar = () => {
             className="btn btn-sm btn-outline-warning "
             onClick={() =>
               logout({
-                returnTo: "http://localhost:3000",
+                returnTo: `${process.env.REACT_APP_CLIENTURL}`,
                 //'https://whatsinmyfridgeapp.herokuapp.com/'
               })
             }

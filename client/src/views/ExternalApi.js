@@ -17,10 +17,10 @@ const ExternalApi = () => {
       // mega:
       // since you didn't define proxy in client's package.json
       // full url for your axios request is needed
-      const response = await axios.get("http://localhost:5000/api/external", {
+      const response = await axios.get(`${process.env.REACT_APP_BACKENDURL}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const responseData = response.data;

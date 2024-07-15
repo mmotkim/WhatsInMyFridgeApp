@@ -17,7 +17,7 @@ const Userpage = () => {
     const initializeUser = async () => {
       axios({
         method: "POST",
-        url: "http://localhost:5000/initializeUser",
+        url: `${process.env.REACT_APP_BACKENDURL}/initializeUser`,
         data: {
           email: user.email,
           auth0_id: user.sub,

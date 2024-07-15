@@ -5,7 +5,7 @@ const IngredientItem = ({ ingredients }) => {
   const removeItem = (event) => {
     event.preventDefault();
     axios
-      .delete(`http://${process.env.REACT_APP_BACKENDURL}/users/${ingredients.user_id}/ingredients/${ingredients.id}`)
+      .delete(`${process.env.REACT_APP_BACKENDURL}/users/${ingredients.user_id}/ingredients/${ingredients.id}`)
       .then((res) => {
         alert("Ingredient Removed!");
         console.log(res);
