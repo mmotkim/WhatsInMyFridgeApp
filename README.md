@@ -1,6 +1,8 @@
 # WhatsInMyFridgeApp
 ![](/readmeAssets/logo.png)
+
 # Overview
+Mmotkim's ISC301 Project. Forked. Fixed authentication, recipe API, fridge function and modified for showcasing locally
 
 What's In My Fridge is an application that allows users to save money by using their fridge ingredients to find delicious recipes and prevent food waste!
 
